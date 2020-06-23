@@ -1,4 +1,4 @@
-# comon16
+# vue-template-general
 
 ## Project setup
 ```
