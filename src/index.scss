@@ -1,0 +1,142 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, 
+h4, h5, h6, p, blockquote, pre, a, abbr, acronym, 
+address, big, cite, code, del, dfn, em, font, img, ins, 
+kbd, q, s, samp, small, strike, strong, sub, sup, tt, 
+var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td { 
+    margin: 0; 
+    padding: 0; 
+    border: 0; 
+    outline: 0; 
+    font-weight: inherit; 
+    font-style: inherit; 
+    vertical-align: baseline; 
+    font-family: -apple-system,SF UI Display,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+}
+* {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+:focus {
+    outline: 0;
+} 
+a, a:link, a:visited, a:hover, a:active{
+    text-decoration:none
+} 
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+} 
+th, td {
+    text-align: left;
+    font-weight: normal;
+} 
+img, iframe {
+    border: none;
+    text-decoration:none;
+} 
+ol, ul {
+    list-style: none;
+} 
+input, textarea, select, button {
+    font-size: 100%;
+    font-family: inherit;
+} 
+select {
+    margin: inherit;
+} 
+hr {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #000;
+    background-color: #000;
+    height: 1px
+}
+body, html {
+    background-color: rgb(255, 255, 255);
+    margin: 0px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 100px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,
+                Helvetica,Arial,
+                sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+}
+
+// 全屏
+.fullscreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+}
+
+// 水平居中
+@mixin centerH($width) {
+    position: absolute;
+    left: 50%;
+    margin-left: -$width / 2;
+}
+@mixin centerV($height) {
+    position: absolute;
+    top: 50%;
+    margin-top: -$height / 2;
+}
+@mixin center($width, $height) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -$width / 2;
+    margin-top: -$height / 2;
+}
+@mixin circle() {
+    border-radius: 50% 50%;
+}
+
+// 移动端适配
+$vw_fontsize: 75;
+$base_design: 750;
+
+@function rem($px) {
+    // 例如：一个div的宽度为100px，那么它对应的rem单位就是（100/根元素的大小）* 1rem
+    @return ($px / $vw_fontsize) * 1rem;
+}
+html {
+    // rem与vw相关联
+    font-size: ($vw_fontsize / ($base_design / 2)) * 100vw;
+    // 同时，通过Media Queries 限制根元素最大最小值
+    @media screen and (max-width: 320px) {
+        font-size: 64px;
+    }
+    @media screen and (min-width: 540px) {
+        font-size: 108px;
+    }
+}
+
+// body 也增加最大最小宽度限制，避免默认100%宽度的 block 元素跟随 body 而过大过小
+body {
+    max-width: 540px;
+    min-width: 320px;
+    font-size: rem(14);
+    color: white;
+}
+
+/* lazyload的图片渐变 */
+img {
+	opacity: 1;
+    transform: translate3d(0, 0, 0);
+	transition: opacity 0.6s ease, transform 0.6s ease;
+}
+img[data-src] {
+    opacity: 0;
+    transform: translate3d(0, rem(160), 0);
+}
